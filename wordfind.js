@@ -355,7 +355,6 @@
             if (gridGrowths > options.maxGridGrowth) {
               throw new Error(`No valid ${options.width}x${options.height} grid found and not allowed to grow more`);
             }
-            console.log(`No valid ${options.width}x${options.height} grid found after ${attempts - 1} attempts, trying with bigger grid`);
             options.height++;
             options.width++;
             attempts = 0;
@@ -381,7 +380,6 @@
                 throw new Error(`${fillingBlanksCount} extra letters were missing to fill the grid`);
             }
             var gridFillPercent = 100 * (1 - extraLettersCount / (options.width * options.height));
-            console.log(`Blanks filled with ${extraLettersCount} random letters - Final grid is filled at ${gridFillPercent.toFixed(0)}%`);
         }
 
         return puzzle;
@@ -464,7 +462,6 @@
         for(var i = 0, len = words.length; i < len; i++) {
           var word = words[i],
               locations = findBestLocations(puzzle, options, word);
-
           if (locations.length > 0 && locations[0].overlap === word.length) {
             locations[0].word = word;
             found.push(locations[0]);

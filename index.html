@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html>
+<link href="https://fonts.googleapis.com/css?family=Lato:100,400,900&display=swap" rel="stylesheet">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Word Find</title>
+    <title>Afikomen</title>
     <link rel="stylesheet" type="text/css" href="wordfind.css">
 </head>
 <body>
-    <h1>WordFind.js by BunKat &amp; Lucas-C</h1>
+    <h1>Find the "AFIKOMEN"</h1>
     <div id="main" role="main">
         <div id="puzzle"></div>
         <ul id="words">
             <li><button id="add-word">Add word</button></li>
         </ul>
         <fieldset id="controls">
-            <label for="allowed-missing-words">Allowed missing words :
+            <label class = "hide" for="allowed-missing-words">Allowed missing words :
                 <input id="allowed-missing-words" type="number" min="0" max="5" step="1" value="2">
             </label>
-            <label for="max-grid-growth">Max grid growth :
+            <label class = "hide" for="max-grid-growth">Max grid growth :
                 <input id="max-grid-growth" type="number" min="0" max="5" step="1" value="0">
             </label>
-            <label for="extra-letters">Extra letters :
+            <label class = "hide" for="extra-letters">Extra letters :
                 <select id="extra-letters">
                     <option value="secret-word" selected>form a secret word</option>
                     <option value="none">none, allow blanks</option>
@@ -29,12 +30,11 @@
                     <option value="random">random</option>
                 </select>
             </label>
-            <label for="secret-word">Secret word :
+            <label class = "hide" for="secret-word">Secret word :
                 <input id="secret-word">
             </label>
-            <button id="create-grid">Create grid</button>
-            <p id="result-message"></p>
-            <button id="solve">Solve Puzzle</button>
+            <div id="create-grid">Make a new puzzle</div>
+            <div id="solve">Show solution</div>
         </fieldset>
     </div>
 
@@ -43,28 +43,49 @@
     <script type="text/javascript" src="wordfindgame.js"></script> 
     <script>
     /* Example words setup */
-    [
-        /*'adorable',
-        'comique',
-        'curieuse',
-        'drole',
-        'engagee',
-        'enjouee',
-        'fidele',
-        'futee',
-        'radieuse',
-        'sensible',
-        'sincere',*/
-        'complice',
-        'creative',
-        'elegante',
-        'farceuse',
-        'joviale',
-        'motivee',
-        'ordonnee',
-        'prudente',
-        'sexy',
-        'tendre',
+    [   'letmypeoplego',
+        'happypassover',
+        'findtheafikonem',
+        'aficomen',
+        'brisket',
+        'matzohballsoup',
+        'afikomokifa',
+        "afi",
+        "fikome",
+        'afikomen',
+        "ofikamen",
+        "ufikomen",
+        'pharoh',
+        'fico',
+        'omen',
+        'karpas',
+        'maror',
+        'charoset',
+        'daiyenu',
+        'wine',
+        'seder',
+        'order',
+        'rugrats',
+        'tommypickles',
+        'moneyplease',
+        'moses',
+        'redsea',
+        'zoom',
+        'skype',
+        'flattenthecurve',
+        "afikomeb",
+        "efikomen",
+        "afik",
+        "afiko",
+        "fika",
+        "afic",
+        "ifikomen",
+        "chadgaya",
+        "exodus",
+        "torah",
+        "ofikomen",
+        "gocubsgo",
+        "deliverus"
     ].map(word => WordFindGame.insertWordBefore($('#add-word').parent(), word));
     $('#secret-word').val('LAETITIA');
 
@@ -79,11 +100,11 @@
         }
         try {
             game = new WordFindGame('#puzzle', {
-                allowedMissingWords: +$('#allowed-missing-words').val(),
-                maxGridGrowth: +$('#max-grid-growth').val(),
-                fillBlanks: fillBlanks,
-                allowExtraBlanks: ['none', 'secret-word-plus-blanks'].includes($('#extra-letters').val()),
-                maxAttempts: 100,
+                allowedMissingWords: 0,
+                maxGridGrowth: 100,
+                fillBlanks: true,
+                allowExtraBlanks: true,
+                maxAttempts: 200,
             });
         } catch (error) {
             $('#result-message').text(`😞 ${error}, try to specify less ones`).css({color: 'red'});
@@ -92,7 +113,7 @@
         wordfind.print(game);
         if (window.game) {
             var emptySquaresCount = WordFindGame.emptySquaresCount();
-            $('#result-message').text(`😃 ${emptySquaresCount ? 'but there are empty squares' : ''}`).css({color: ''});
+            // $('#result-message').text(`😃 ${emptySquaresCount ? 'but there are empty squares' : ''}`).css({color: ''});
         }
         window.game = game;
     }

@@ -273,25 +273,55 @@
     *
     * @param {[[String]]} puzzle: The puzzle to solve
     */
+
+function doTheThing(solution, i){
+  // console.log(solution, i)
+                let word = solution[i].word
+
+setTimeout(function(){
+                 var orientation = solution[i].orientation,
+                  x = solution[i].x,
+                  y = solution[i].y,
+                  next = wordfind.orientations[orientation];
+
+              var wordEl = $('input.word[value="' + word + '"]');
+              // console.log(word)
+              if (!wordEl.hasClass('wordFound')) {
+                for (let j = 0, size = word.length; j < size; j++) {
+                  setTimeout(function(){
+                        var nextPos = next(x, y, j);
+                        var solvedClass = (word == "afikomen") ? "superSolved" : "solved"
+                        if(solvedClass == "solved"){
+                          $('[x="' + nextPos.x + '"][y="' + nextPos.y + '"]').css("background-color", "rgba(0,0,0," + (.2 + i*.01) + ")")
+                        }
+                        $('[x="' + nextPos.x + '"][y="' + nextPos.y + '"]').addClass(solvedClass);
+                  },100*(j+1))
+                }
+                wordEl.addClass('wordFound');
+              }
+            }, 500*(i+1)+500*(word.length+1))
+        }
+
     this.solve = function() {
       var solution = wordfind.solve(puzzle, wordList).found;
 
       for( var i = 0, len = solution.length; i < len; i++) {
-        var word = solution[i].word,
-            orientation = solution[i].orientation,
-            x = solution[i].x,
-            y = solution[i].y,
-            next = wordfind.orientations[orientation];
-
-        var wordEl = $('input.word[value="' + word + '"]');
-        if (!wordEl.hasClass('wordFound')) {
-          for (var j = 0, size = word.length; j < size; j++) {
-            var nextPos = next(x, y, j);
-            $('[x="' + nextPos.x + '"][y="' + nextPos.y + '"]').addClass('solved');
+        // setTimeout(function() { console.log(i) }, 100);
+        // console.log(solution)
+        var afindex;
+        var afikomen = solution.filter(function(o,i){
+          if(o.word == "afikomen"){
+            afindex = i;
+            return true;
           }
-
-          wordEl.addClass('wordFound');
+        })
+        // console.log(afindex, afikomen)
+        if(afikomen.length == 1){
+          solution.splice(afindex, 1)
+          solution.push(afikomen[0])
         }
+        console.log(solution)
+        doTheThing(solution, i)
       }
     };
   };

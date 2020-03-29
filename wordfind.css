@@ -7,7 +7,7 @@
 */
 
 body {
-  font: 1em Arial;
+  font-family: 'Lato', sans-serif;
 }
 
 p {
@@ -16,12 +16,16 @@ p {
 }
 
 h1 {
-  text-align: center; /* to center #puzzle on small devices */
-}
+text-align: center;
+    font-family: Lato;
+    font-weight: 100;
+    font-size: 40px;
+  }
 
 #main {
   margin: 0 auto;
   max-width: 80rem;
+  width: fit-content;
   text-align: center; /* to center #puzzle on small devices */
 }
 @media only screen and (min-width: 600px) {
@@ -35,8 +39,9 @@ h1 {
 */
 #puzzle {
   display: inline-block;
-  border: 1px solid black;
   padding: 3vw;
+  background: url("matzoh.jpg");
+  background-size: cover;
 }
 
 #puzzle > div { /* rows */
@@ -46,12 +51,12 @@ h1 {
 
 /* style for each square in the puzzle */
 .puzzleSquare {
-  height: 7vw;
-  width: 7vw;
+  height: 5vw;
+  width: 5vw;
   text-transform: uppercase;
-  background-color: white;
+  background:none;
   border: 0;
-  font: 5vw sans-serif;
+  font: 3vw Lato;
 }
 @media only screen and (min-width: 600px) {
   #puzzle {
@@ -59,9 +64,9 @@ h1 {
     padding: 1rem;
   }
   .puzzleSquare {
-    height: 3.5rem;
-    width: 3.5rem;
-    font: 2.5rem sans-serif;
+    height: 2rem;
+    width: 2rem;
+    font: 1.5rem sans-serif;
   }
 }
 
@@ -81,7 +86,11 @@ button::-moz-focus-inner {
 }
 
 #puzzle .solved {
-  background-color: purple;
+  /*background-color: ;*/
+  color: white;
+}
+#puzzle .superSolved{
+  background-color: #fdbf11 !important;
   color: white;
 }
 
@@ -93,8 +102,11 @@ button::-moz-focus-inner {
 /**
 * Styles for the word list
 */
+.hide{
+  display: none;
+}
 #words {
-  display: inline-block;
+  display: none;
   max-width: 30rem;
   padding: 1em;
   list-style-type: none;
@@ -124,11 +136,12 @@ button::-moz-focus-inner {
 * Styles for the controls
 */
 #controls {
-  display: inline-block;
-  max-width: 30rem;
-  padding: 1em;
-  border: none;
-  text-align: left;
+    display: block;
+    max-width: 30rem;
+    padding: 1em;
+    border: none;
+    text-align: left;
+    clear: both;
 }
 label {
   white-space: nowrap;
@@ -146,8 +159,20 @@ select {
   max-width: 10rem;
 }
 #create-grid, #solve {
-  display: block;
-  margin-top: 1rem;
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    float: left;
+    padding: 10px 20px;
+    background: #9d9d9d;
+    margin-right: 20px;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+}
+#create-grid:hover, #solve:hover{
+  background: #353535;
 }
 #secret-word {
   text-transform: uppercase;
