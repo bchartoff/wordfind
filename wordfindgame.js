@@ -297,13 +297,16 @@ setTimeout(function(){
                         $('[x="' + nextPos.x + '"][y="' + nextPos.y + '"]').addClass(solvedClass);
                   },100*(j+1))
                 }
+                // console.log(word,i)
+                $("#solvedWords").append("<li>" + word + "</li>")
                 wordEl.addClass('wordFound');
               }
-            }, 500*(i+1)+500*(word.length+1))
+            }, 500*(i+1)+100*(word.length+1))
         }
 
     this.solve = function() {
       var solution = wordfind.solve(puzzle, wordList).found;
+      solution.sort(function(a,b){ return a.word.length - b.word.length })
 
       for( var i = 0, len = solution.length; i < len; i++) {
         // setTimeout(function() { console.log(i) }, 100);
@@ -320,7 +323,6 @@ setTimeout(function(){
           solution.splice(afindex, 1)
           solution.push(afikomen[0])
         }
-        console.log(solution)
         doTheThing(solution, i)
       }
     };
